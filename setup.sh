@@ -77,7 +77,7 @@ fi
 echo
 echo " 6. Starting folder monitoring and synchronization (Ctrl + ^ to close)..."
 echo
-python3 src/folder_sync_test/main.py \
+python3 src/folder_sync/main.py \
     --source_dir "$SOURCE_DIR" \
     --replica_dir "$REPLICA_DIR" \
     --log_file "./log_bot.log" \
