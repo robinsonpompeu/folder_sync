@@ -22,7 +22,7 @@ At its core lies a custom-developed change detection module combined with hash v
 
 The following requirements must be satisfied prior to a local installation and execution:
 
-## System Requirements (Linus)
+## System Requirements (Linux)
 
 - Git (version control)
 - Python 3.12 or higher.
@@ -36,7 +36,7 @@ Follow this step-by-step guide for a local installation of the package.
 On a new terminal session run the following commands to clone the repository, where `proj_dir` is the installation path:
 
 ```console
-user@ubuntu:~$ git clone https://github.com/robinsonpompeu/folder_sync_test proj_dir
+user@ubuntu:~$ git clone https://github.com/robinsonpompeu/folder_sync proj_dir
 user@ubuntu:~$ cd proj_dir
 ```
 
