@@ -22,3 +22,4 @@
 - [ ] Manage trailing slashes in user inputs
 - [ ] Create link to module documentation
 - [ ] Use pandoc to generate README.md
+- [ ] Fix project name not set on docs page
