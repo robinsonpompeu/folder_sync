@@ -16,6 +16,7 @@
 - [ ] Add bidirectional synchronization
 - [ ] Benchmark performance
 - [ ] Use pandoc to generate README.md
+- [ ] Implement multiprocessing volume operations
 
 ## Low Priority
 - [ ] Refactor argparse in main.py and usr_sim.py
