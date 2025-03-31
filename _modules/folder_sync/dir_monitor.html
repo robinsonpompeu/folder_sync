@@ -130,11 +130,7 @@
 <span class="sd">    pandas.Dataframe</span>
 <span class="sd">        Dataframe with relative paths of folders and files as dataframe</span>
 <span class="sd">        index, along with the file hashes in hash column.</span>
-<span class="sd">    </span>
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    TypeError</span>
-<span class="sd">        Dir input is not a valid string path.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Dir path is not a valid string path.&quot;</span><span class="p">)</span>
@@ -167,10 +163,6 @@
 <span class="sd">    str</span>
 <span class="sd">        String with the hexadecimal hash digest.</span>
 <span class="sd">    </span>
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    Exception</span>
-<span class="sd">        MUST BE IMPROVED HERE.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sha256</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
