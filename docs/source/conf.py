@@ -3,6 +3,9 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path('../..', 'src/folder_sync').resolve()))
 
+project = "Folder Sync"
+author = "Robinson Pompeu"
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
