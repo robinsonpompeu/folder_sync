@@ -1,0 +1,5 @@
+# Description
+
+Folder Sync is a Python-based utility for real-time monitoring and synchronization of local directories. It ensures consistency between source and destination folders by automatically detecting and replicating file changes — including creations, modifications, and deletions — through a hash-based verification system.
+
+At its core lies a custom-developed change detection module combined with hash verifications. It allows unidirectional synchronization, strictly mirroring source content to a target location. A standout feature is its integrated testing daemon, which simulates dynamic folder changes to validate synchronization behavior under controlled stress conditions, eliminating the need for manual testing. Every operation generates timestamped logs, providing detailed audit trails for both performance review and troubleshooting.
