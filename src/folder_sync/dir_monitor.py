@@ -39,11 +39,7 @@ def list_tree(dir):
     pandas.Dataframe
         Dataframe with relative paths of folders and files as dataframe
         index, along with the file hashes in hash column.
-    
-    Raises
-    ------
-    TypeError
-        Dir input is not a valid string path.
+
     """
     if not isinstance(dir, str) or not Path(dir).is_dir():
         raise TypeError("Dir path is not a valid string path.")
@@ -73,10 +69,6 @@ def hash_file(filepath):
     str
         String with the hexadecimal hash digest.
     
-    Raises
-    ------
-    Exception
-        MUST BE IMPROVED HERE.
     """
     sha256 = hashlib.sha256()
     with open(filepath, 'rb') as f:
