@@ -97,6 +97,7 @@ This will remove the project folder and the virtual environment created to run t
 - [ ] Conclude unit tests of vol_manager module
 - [ ] Create changelog with commit messages
 - [ ] Fix loggging bot removing big file directly after creating it
+- [ ] Test operations on file in use by another process
 
 ## Medium Priority
 - [ ] Perform unit and integration tests on MacOS and Windows
