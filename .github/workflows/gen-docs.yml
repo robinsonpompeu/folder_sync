@@ -1,0 +1,44 @@
+name: Build and Deploy Documentation
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies and project
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install sphinx sphinx-rtd-theme sphinx-autodoc-typehints myst-parser
+
+        pip install --editable .
+
+    - name: Generate HTML documentation
+      run: |
+        chmod +x gen-docs.sh
+        ./gen-docs.sh
+
+        sphinx-apidoc -o docs/source src/${{ github.event.repository.name }}
+
+        cd ./docs
+        make html
+
+    - name: Deploy documentation to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html
+        keep_files: false

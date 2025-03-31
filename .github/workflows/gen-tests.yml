@@ -1,0 +1,74 @@
+name: Unit Tests with Pytest
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install --editable .
+
+    - name: Setup Test Folder Environment
+      run: |
+        python3 tests/setup_teardown/folder_setup.py
+
+    - name: Unit Tests with Pytest
+      run: |
+        pip install pytest
+        pytest tests --ignore=tests/setup_teardown --junitxml=tests/test-results/test-results.xml -sv -rA
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      id: test-results
+      if: always()
+      with:
+        files: |
+          tests/test-results/**/*.xml
+
+    - name: Set badge color
+      shell: bash
+      run: |
+        case ${{ fromJSON( steps.test-results.outputs.json ).conclusion }} in
+          success)
+            echo "BADGE_COLOR=31c653" >> $GITHUB_ENV
+            ;;
+          failure)
+            echo "BADGE_COLOR=800000" >> $GITHUB_ENV
+            ;;
+          neutral)
+            echo "BADGE_COLOR=696969" >> $GITHUB_ENV
+            ;;
+        esac
+
+    - name: Create badge
+      uses: emibcn/badge-action@808173dd03e2f30c980d03ee49e181626088eee8
+      with:
+        label: Unit Tests with Pytest
+        status: '${{ fromJSON( steps.test-results.outputs.json ).formatted.stats.tests }} tests, ${{ fromJSON( steps.test-results.outputs.json ).formatted.stats.runs }} runs: ${{ fromJSON( steps.test-results.outputs.json ).conclusion }}'
+        color: ${{ env.BADGE_COLOR }}
+        path: badge.svg
+
+    - name: Upload badge to Gist
+      if: >
+        github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main' ||
+        github.event_name != 'workflow_run' && github.ref == 'refs/heads/main'
+      uses: andymckay/append-gist-action@6e8d64427fe47cbacf4ab6b890411f1d67c07f3e
+      with:
+        token: ${{ secrets.GIST_TOKEN }}
+        gistURL: https://gist.github.com/robinsonpompeu/cd056cc8ff99a13b1570783753860e8d
+        file: badge.svg
