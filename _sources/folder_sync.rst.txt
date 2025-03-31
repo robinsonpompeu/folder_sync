@@ -1,0 +1,45 @@
+folder\_sync package
+====================
+
+Submodules
+----------
+
+folder\_sync.dir\_monitor module
+--------------------------------
+
+.. automodule:: folder_sync.dir_monitor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+folder\_sync.log\_recorder module
+---------------------------------
+
+.. automodule:: folder_sync.log_recorder
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+folder\_sync.main module
+------------------------
+
+.. automodule:: folder_sync.main
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+folder\_sync.vol\_manager module
+--------------------------------
+
+.. automodule:: folder_sync.vol_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: folder_sync
+   :members:
+   :show-inheritance:
+   :undoc-members:

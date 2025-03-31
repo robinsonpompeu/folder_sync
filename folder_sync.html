@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>folder_sync package &#8212; Folder Monitoring and Synchronization 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="folder-sync-package">
+<h1>folder_sync package<a class="headerlink" href="#folder-sync-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-folder_sync.dir_monitor">
+<span id="folder-sync-dir-monitor-module"></span><h2>folder_sync.dir_monitor module<a class="headerlink" href="#module-folder_sync.dir_monitor" title="Link to this heading">¶</a></h2>
+<p>Directory Monitor Module</p>
+<p>This module contains two functions that are responsible for a directory
+surveillance for modifications.</p>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>The hash computation of folders was not implemented by a deliberate
+choice at the project planning step. In this first version, folder
+modifications are interpreted solely as file changes, although other
+operations (e.g. access permission alterations) of folders may correspond
+to directory modifications.</p>
+</div></blockquote>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.dir_monitor.hash_file">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.dir_monitor.</span></span><span class="sig-name descname"><span class="pre">hash_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/dir_monitor.html#hash_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.dir_monitor.hash_file" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sha256 hash of a file.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>filepath<span class="classifier">str</span></dt><dd><p>Absolute path of file to compute hash.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>String with the hexadecimal hash digest.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h3>Raises<a class="headerlink" href="#raises" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>Exception</dt><dd><p>MUST BE IMPROVED HERE.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.dir_monitor.list_tree">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.dir_monitor.</span></span><span class="sig-name descname"><span class="pre">list_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/dir_monitor.html#list_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.dir_monitor.list_tree" title="Link to this definition">¶</a></dt>
+<dd><p>Fill a dataframe with dir tree structure.</p>
+<p>The dataframe index corresponds to the relative path,
+with respect to <cite>dir</cite>, of all files and folders on dir,
+and hash column stores the computed hash of all files (as
+mentioned in the module description, hash of folders is not
+implemented in the first version of the folder sync project).</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>dir<span class="classifier">str</span></dt><dd><p>Absolute path of directory to be monitored.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>pandas.Dataframe</dt><dd><p>Dataframe with relative paths of folders and files as dataframe
+index, along with the file hashes in hash column.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Raises<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>Dir input is not a valid string path.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-folder_sync.log_recorder">
+<span id="folder-sync-log-recorder-module"></span><h2>folder_sync.log_recorder module<a class="headerlink" href="#module-folder_sync.log_recorder" title="Link to this heading">¶</a></h2>
+<p>Logging wrapper for Python logging module</p>
+<p>This module provides an interface for configuring and using logs with
+predefined formats, handlers (console and log file), and log levels.
+It allows customization for the log file path in append mode.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.log_recorder.config_log">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.log_recorder.</span></span><span class="sig-name descname"><span class="pre">config_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/log_recorder.html#config_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.log_recorder.config_log" title="Link to this definition">¶</a></dt>
+<dd><p>Configure and return a logger with console and file output.</p>
+<section id="id4">
+<h3>Parameters<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>log_file<span class="classifier">str</span></dt><dd><p>Path to the log file (logs are always appended).</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Returns<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>logging.Logger</dt><dd><p>Logger instance with StreamHandler (stdout) and FileHandler.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.log_recorder.decorate">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.log_recorder.</span></span><span class="sig-name descname"><span class="pre">decorate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decorator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/log_recorder.html#decorate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.log_recorder.decorate" title="Link to this definition">¶</a></dt>
+<dd><p>Applies a decorator to all functions in a module.</p>
+<section id="args">
+<h3>Args<a class="headerlink" href="#args" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>module (module): module object to decorate functions in.
+decorator (callable): Decorator function to apply (e.g., <cite>log</cite>).
+<a href="#id6"><span class="problematic" id="id7">*</span></a>args: Additional arguments to pass to the decorator.</p>
+</div></blockquote>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>None: Modifies the module in-place.</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.log_recorder.log">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.log_recorder.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/log_recorder.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.log_recorder.log" title="Link to this definition">¶</a></dt>
+<dd><p>Decorator that logs function calls, arguments, returns, and exceptions.</p>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>func<span class="classifier">callable</span></dt><dd><p>Function to decorate.</p>
+</dd>
+<dt>log_file<span class="classifier">str</span></dt><dd><p>Path to log file..</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>callable</dt><dd><p>Wrapped function with logging behavior.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="folder-sync-main-module">
+<h2>folder_sync.main module<a class="headerlink" href="#folder-sync-main-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-folder_sync.vol_manager">
+<span id="folder-sync-vol-manager-module"></span><h2>folder_sync.vol_manager module<a class="headerlink" href="#module-folder_sync.vol_manager" title="Link to this heading">¶</a></h2>
+<p>Volume Manager Operations</p>
+<p>This module implements operations required to ensure folder synchronization.
+For the sake of clarity only one update replica method is implemented (rather 
+than file and dir copy methods), since some files in a given parent folder may
+not require to be updated if the parent folder is modified.</p>
+<section id="id11">
+<h3>Notes<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>With respect to error handling the approach used here is based on EAFP 
+Python principle (which states that it is “easier to ask forgiveness 
+than permission”).</p>
+<p>Exception handling is focused on folder and file accessibility and permission
+policies. Other exceptions are handled in such a way that their details
+are logged for further inspection.</p>
+</div></blockquote>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.vol_manager.remove_dir">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.vol_manager.</span></span><span class="sig-name descname"><span class="pre">remove_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/vol_manager.html#remove_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.vol_manager.remove_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Attempt to remove a folder given its location.</p>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>dir_path<span class="classifier">str</span></dt><dd><p>Absolute path of folder to be removed.</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>Folder path if successfully removed.</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Raises<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>Folder path associated with a nonexisting dir.</p>
+</dd>
+<dt>PermissionError</dt><dd><p>Folder without necessary permissions to be deleted.</p>
+</dd>
+<dt>Exception</dt><dd><p>Any other error raised.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.vol_manager.remove_file">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.vol_manager.</span></span><span class="sig-name descname"><span class="pre">remove_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/vol_manager.html#remove_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.vol_manager.remove_file" title="Link to this definition">¶</a></dt>
+<dd><p>Attempt to remove a file given its location.</p>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>file_path<span class="classifier">str</span></dt><dd><p>Absolute filepath of file to be removed.</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h3>Returns<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>File path if successfully removed.</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h3>Raises<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>File path provided is not a valid string.</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>File path associated with a nonexisting file.</p>
+</dd>
+<dt>PermissionError</dt><dd><p>File without necessary permissions to be deleted.</p>
+</dd>
+<dt>Exception</dt><dd><p>Any other error raised.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="folder_sync.vol_manager.update_dest">
+<span class="sig-prename descclassname"><span class="pre">folder_sync.vol_manager.</span></span><span class="sig-name descname"><span class="pre">update_dest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replica_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/folder_sync/vol_manager.html#update_dest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#folder_sync.vol_manager.update_dest" title="Link to this definition">¶</a></dt>
+<dd><p>Duplicate replica folder structure with items not synchronized from source.</p>
+<p>Creates the corresponding replica folder in case <cite>source_path</cite> points to a 
+folder not present in replica, or copies to replica the source file indicated
+in <cite>source_path</cite>.</p>
+<section id="id18">
+<h3>Parameters<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>source_path<span class="classifier">str</span></dt><dd><p>Absolute folder or file path from source dir.</p>
+</dd>
+<dt>replica_path<span class="classifier">str</span></dt><dd><p>Absolute folder or file path on replica dir</p>
+</dd>
+</dl>
+</section>
+<section id="id19">
+<h3>Returns<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>str</dt><dd><p>Absolute path of updated file or folder on replica dir.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Raises<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>Folder or file path provided is not a valid string.</p>
+</dd>
+<dt>Exception</dt><dd><p>Any other error raised.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-folder_sync">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-folder_sync" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Folder Monitoring and Synchronization</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Robinson Pompeu.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/folder_sync.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
