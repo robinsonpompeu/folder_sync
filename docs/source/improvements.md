@@ -15,10 +15,10 @@
 - [ ] Create hash wrapper function for MD5 and other algorithms
 - [ ] Add bidirectional synchronization
 - [ ] Benchmark performance
-- [ ] Use pandoc to generate README.md
 - [ ] Implement multiprocessing volume operations
 
 ## Low Priority
 - [ ] Refactor argparse in main.py and usr_sim.py
 - [ ] Manage trailing slashes in user inputs
 - [ ] Create link to module documentation
+- [ ] Use pandoc to generate README.md
